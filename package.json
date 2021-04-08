@@ -1,0 +1,28 @@
+{
+  "name": "mz-navigator",
+  "version": "1.0.0",
+  "description": "my custom navigation page",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack -c build/webpack.dev.js",
+    "build": "webpack -c build/webpack.prod.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/michaelji520/mz-navigator.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/michaelji520/mz-navigator/issues"
+  },
+  "homepage": "https://github.com/michaelji520/mz-navigator#readme",
+  "devDependencies": {
+    "clean-webpack-plugin": "^3.0.0",
+    "html-webpack-plugin": "^5.3.1",
+    "webpack": "^5.30.0",
+    "webpack-cli": "^4.6.0"
+  }
+}
