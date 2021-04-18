@@ -1,7 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
-
+const sveltePreprocess = require('svelte-preprocess');
 
 module.exports = {
   mode: 'development',
@@ -23,8 +23,29 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.(less|css)$/i,
+        use: [
+          {loader: 'style-loader'},
+          {loader: 'css-loader', options: {url: true}}, // necessary if you use url('/path/to/some/asset.png|jpg|gif')
+          {
+            loader: 'less-loader',
+            options: {lessOptions: {strictMath: true}}
+          }
+        ]
+      },
+      {
         test: /\.(svelte)$/,
-        loader: 'svelte-loader'
+        use: {
+          loader: 'svelte-loader',
+          options: {
+            emitCss: true,
+            preprocess: sveltePreprocess({
+              postcss: {
+                plugins: [require('autoprefixer')()]
+              }
+            })
+          }
+        }
       },
       {
         // required to prevent errors from Svelte on Webpack 5+, omit on Webpack 4

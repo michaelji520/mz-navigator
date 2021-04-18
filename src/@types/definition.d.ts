@@ -1,3 +1,4 @@
+
 declare module '*.png' {
   const value: string;
   export = value;
@@ -8,8 +9,11 @@ declare module '*.ico' {
   export = value;
 }
 
-
 declare module '*.svelte' {
   import Svelte from 'svelte';
   export default Svelte;
+}
+
+declare module '*.less' {
+  export default any;
 }

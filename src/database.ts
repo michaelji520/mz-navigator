@@ -6,7 +6,7 @@
 export const SEARCH_ENGINES: Array<SearchEngine> = [
   {
     key: 'baidu',
-    icon: require('./icons/baidu.ico').default,
+    icon: require('./assets/icons/baidu.ico').default,
     link: 'https://www.baidu.com/s?wd=',
     name: '百度'
   }
