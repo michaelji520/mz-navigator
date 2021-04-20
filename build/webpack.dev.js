@@ -66,7 +66,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: '猪猪导航',
+      title: '小猪导航',
       template: path.resolve(__dirname, '../public/index.html')
     }),
     new CleanWebpackPlugin()
