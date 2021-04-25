@@ -1,13 +1,12 @@
 
-declare module '*.png' {
-  const value: string;
-  export = value;
-}
-
-declare module '*.ico' {
-  const value: string;
-  export = value;
-}
+declare module '*.png';
+declare module "*.svg";
+declare module "*.jpg";
+declare module "*.jpeg";
+declare module "*.gif";
+declare module "*.bmp";
+declare module "*.tiff";
+declare module '*.ico';
 
 declare module '*.svelte' {
   import Svelte from 'svelte';

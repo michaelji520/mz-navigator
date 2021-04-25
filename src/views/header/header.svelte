@@ -1,6 +1,6 @@
 <div class="header">
   <nav class="top-bar">
-    <img class="logo" src={LOGO} alt="">
+    <img class="logo" src={LOGO} alt="LOGO">
     <span class="name">小猪导航</span>
     <span class="datetime">{datetime}</span>
   </nav>
@@ -13,20 +13,27 @@
 
 </div>
 
-<script>
-  import {SEARCH_ENGINES} from '../../database';
+<script lang="ts">
+  import {SEARCH_ENGINES} from '../../database/database';
   import LOGO from './assets/logo_pig_small.png';
 
-  const date = new Date();
+  const date: Date = new Date();
   const week = ['星期天', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
   const datetime = `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日 ${week[date.getDay()]}`;
   let keyword = '';
+
+  let current = 0;
+
+  const openNewTab = (current: number, list: Array<SearchEngine>) => {
+    if (!Number.isInteger(current) || current < 0) current = 0;
+    window.open(`${list[current].link}${keyword}`,'_blank');
+  }
 
   const handleInputKeyDown = (e) => {
     console.log(e);
     if (e.keyCode === 13) {
       console.log('enter');
-      window.open(`https://www.baidu.com/s?wd=${keyword}`,'_blank');
+      openNewTab(current, SEARCH_ENGINES);
     }
   }
 
@@ -63,7 +70,7 @@
       }
     }
     .search-bar {
-      margin-top: 12%;
+      margin-top: 80px;
       .search-row {
         width: 100%;
         display: flex;
@@ -71,7 +78,7 @@
       }
       .keyword {
         height: 36px;
-        width: 72%;
+        width: 64%;
         outline: none;
         border: 0;
         border-radius: 4px;
