@@ -2,8 +2,6 @@
  * @description 本文件保存导航信息元数据
  */
 
-import type { link } from "node:fs";
-
 
 export const SEARCH_ENGINES: Array<SearchEngine> = [
   {
@@ -31,3 +29,30 @@ export const SEARCH_ENGINES: Array<SearchEngine> = [
     name: '谷歌'
   }
 ];
+
+export const WEBSITES: Array<Category> = [
+  {
+    name: '排版处理',
+    value: 1,
+    links: [
+      {
+        icon: '',
+        url: '',
+        name: '秀米',
+        description: ''
+      },
+      {
+        icon: '',
+        url: '',
+        name: '135编辑器',
+        description: ''
+      },
+      {
+        icon: '',
+        url: '',
+        name: 'i排版',
+        description: ''
+      },
+    ]
+  },
+]

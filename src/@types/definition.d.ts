@@ -1,3 +1,6 @@
+/**
+ * @description 模块定义
+ */
 
 declare module '*.png';
 declare module "*.svg";

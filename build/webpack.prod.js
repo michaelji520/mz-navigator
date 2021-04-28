@@ -1,7 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
-
+const sveltePreprocess = require('svelte-preprocess');
 
 module.exports = {
   mode: 'production',
@@ -23,10 +23,10 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.less$/i,
+        test: /\.(less|css)$/i,
         use: [
           {loader: 'style-loader'},
-          {loader: 'css-loader'},
+          {loader: 'css-loader', options: {url: true}}, // necessary if you use url('/path/to/some/asset.png|jpg|gif')
           {
             loader: 'less-loader',
             options: {lessOptions: {strictMath: true}}
@@ -35,7 +35,17 @@ module.exports = {
       },
       {
         test: /\.(svelte)$/,
-        loader: 'svelte-loader'
+        use: {
+          loader: 'svelte-loader',
+          options: {
+            emitCss: true,
+            preprocess: sveltePreprocess({
+              postcss: {
+                plugins: [require('autoprefixer')()]
+              }
+            })
+          }
+        }
       },
       {
         // required to prevent errors from Svelte on Webpack 5+, omit on Webpack 4
@@ -56,7 +66,8 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: '猪猪导航',
+      title: '小猪导航',
+      favicon: path.resolve(__dirname, '../public/logo.png'),
       template: path.resolve(__dirname, '../public/index.html')
     }),
     new CleanWebpackPlugin()

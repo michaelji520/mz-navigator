@@ -3,11 +3,20 @@
     <img class="logo" src={LOGO} alt="LOGO">
     <span class="name">小猪导航</span>
     <span class="datetime">{datetime}</span>
+    <span class="daily-sentence">{sentence}</span>
   </nav>
+  <div class="daily-words"></div>
   <div class="search-bar">
-    <div class="daily-words"></div>
-    <div class="search-row">
+    <ul class="search-list">
+      {#each SEARCH_ENGINES as engine, i}
+      <li on:click={(e) => handleSearchEngineClick(e, i)} class={i === current ? 'active' : ''}>{engine.name}</li>
+      {/each}
+    </ul>
+    <div class="keyword-bar">
       <input bind:value={keyword} on:keydown={handleInputKeyDown} type="text" name="keyword" class="keyword" placeholder="请输入搜索内容">
+      <span class="icon-wrapper">
+        <svg class="search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="576" data-spm-anchor-id="a313x.7781069.1998910419.i1"><path d="M192 448c0-141.152 114.848-256 256-256s256 114.848 256 256-114.848 256-256 256-256-114.848-256-256z m710.624 409.376l-206.88-206.88A318.784 318.784 0 0 0 768 448c0-176.736-143.264-320-320-320S128 271.264 128 448s143.264 320 320 320a318.784 318.784 0 0 0 202.496-72.256l206.88 206.88 45.248-45.248z" p-id="577"></path></svg>
+      </span>
     </div>
   </div>
 
@@ -16,13 +25,20 @@
 <script lang="ts">
   import {SEARCH_ENGINES} from '../../database/database';
   import LOGO from './assets/logo_pig_small.png';
+  import Flyio from 'flyio';
 
   const date: Date = new Date();
   const week = ['星期天', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
   const datetime = `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日 ${week[date.getDay()]}`;
   let keyword = '';
+  let sentence: string = '';
 
   let current = 0;
+
+  Flyio.get('https://v1.hitokoto.cn').then((res) => {
+    const data = res && res.data || {};
+    sentence = data.hitokoto && data.from ? `${data.hitokoto}  ——${data.from}` : '';
+  });
 
   const openNewTab = (current: number, list: Array<SearchEngine>) => {
     if (!Number.isInteger(current) || current < 0) current = 0;
@@ -32,9 +48,12 @@
   const handleInputKeyDown = (e) => {
     console.log(e);
     if (e.keyCode === 13) {
-      console.log('enter');
       openNewTab(current, SEARCH_ENGINES);
     }
+  }
+
+  const handleSearchEngineClick = (e, idx) => {
+    current = idx;
   }
 
 
@@ -63,27 +82,64 @@
         line-height: 18px;
         padding: 0 80px 0 0;
       }
-      .datetime {
-        font-size: 16px;
+      .datetime, .daily-sentence {
+        font-size: 14px;
         line-height: 16px;
         color: #DDDDDD;
       }
+      .daily-sentence {
+        font-size: 14px;
+        margin: 0 0 0 auto;
+      }
     }
     .search-bar {
-      margin-top: 80px;
-      .search-row {
-        width: 100%;
+      width: 56%;
+      margin: 80px auto 0 auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      .search-list {
         display: flex;
-        justify-content: center;
+        li {
+          font-size: 14px;
+          padding: 6px 20px;
+          cursor: pointer;
+          background-color: rgba(255, 255, 255, 0.1);
+          border-radius: 4px 4px 0 0;
+          color: #CCCCCC;
+          &.active {
+            color: #333333;
+            background-color: rgba(255, 255, 255, 0.8);
+          }
+        }
+      }
+      .keyword-bar {
+        display: flex;
+        align-items: center;
       }
       .keyword {
-        height: 36px;
-        width: 64%;
+        font-size: 14px;
+        flex: 1;
+        height: 42px;
         outline: none;
         border: 0;
-        border-radius: 4px;
-        padding: 8px 12px;
-        background-color: rgba(255, 255, 255, 0.5);
+        border-radius: 0 0 0 4px;
+        padding: 8px 0 8px 12px;
+        background-color: rgba(255, 255, 255, 0.8);
+      }
+      .icon-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 48px;
+        height: 42px;
+        background-color: rgba(255, 255, 255, 0.8);
+        border-radius: 0 4px 4px 0;
+      }
+      .search-icon {
+        width: 24px;
+        height: 24px;
+        fill: #444444;
       }
     }
   }

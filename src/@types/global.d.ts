@@ -1,6 +1,6 @@
 
 /**
- * @description 搜索引擎字段定义
+ * @description 字段定义
  */
 
 interface SearchEngine {
@@ -17,11 +17,15 @@ interface SearchEngine {
 /**
  * @description 单个链接定义
  */
-interface Link {
+interface Website {
   // 链接图标
   icon: string;
   // 链接访问地址
   url: string;
+  // 网站名称
+  name: string;
+  // 网址说明
+  description: string;
 }
 
 /**
@@ -33,5 +37,6 @@ interface Category {
   // 分类标识
   value: number;
   // 分类下的链接列表
-  links: Array<Link>;
+  links: Array<Website>;
 }
+

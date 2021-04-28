@@ -2,7 +2,6 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const sveltePreprocess = require('svelte-preprocess');
-const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 
 
 module.exports = {
@@ -69,9 +68,9 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       title: '小猪导航',
+      favicon: path.resolve(__dirname, '../public/logo.png'),
       template: path.resolve(__dirname, '../public/index.html')
     }),
-    new FaviconsWebpackPlugin(path.resolve(__dirname, '../public/logo.png')), // svg works too!
     new CleanWebpackPlugin()
   ]
 };
