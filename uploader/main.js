@@ -1,6 +1,7 @@
 const qiniu = require('qiniu');
 const path = require('path');
 const fs = require('fs');
+const mime = require('mime');
 
 const ACCESS_KEY = 'fZv_f_wX_ka0faszVvXcDAgRMRWEnjiyOHfCBuGa';
 const SECRET_KEY = '-UXI4VD90-ZJzoGW--NOj8UUtA0fMmYpox5_WVUf';
@@ -15,7 +16,6 @@ var config = new qiniu.conf.Config();
 var bucketManager = new qiniu.rs.BucketManager(mac, config);
 var putPolicy = new qiniu.rs.PutPolicy(options);
 var uploadToken = putPolicy.uploadToken(mac);
-var putExtra = new qiniu.form_up.PutExtra();
 var formUploader = new qiniu.form_up.FormUploader(config);
 const distPath = path.resolve(__dirname, '../dist');
 
@@ -38,9 +38,14 @@ function getDirFileNameList(dir) {
 // 文件上传
 function upload(fileName, dir) {
   return new Promise((resolve, reject) => {
-    var options = {scope: `${bucketName}:${fileName}`, expires: 3600};
+    const fileFullPath = `${bucketName}:${fileName}`;
+    var options = {scope: fileFullPath, expires: 3600};
     var putPolicy = new qiniu.rs.PutPolicy(options);
     var uploadToken = putPolicy.uploadToken(mac);
+    let putExtra = new qiniu.form_up.PutExtra();
+    putExtra.fname = fileName;
+    putExtra.mimeType = mime.getType(fileName);
+    console.log(putExtra);
     formUploader.putFile(uploadToken, fileName, `${dir}/${fileName}`, putExtra, function(respErr, respBody, respInfo) {
       if (respErr) throw respErr;
       if (respInfo.statusCode == 200) resolve(respBody);

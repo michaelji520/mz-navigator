@@ -3,13 +3,15 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const sveltePreprocess = require('svelte-preprocess');
 
+const isProd = process.env.NODE_ENV === 'production';
+
 module.exports = {
-  mode: 'production',
+  mode: isProd ? 'production' : 'development',
   entry: {
     app: path.resolve(__dirname, '../src/app.ts')
   },
   output: {
-    filename: '[name].[hash:8].js',
+    filename: isProd ? '[name].[hash:8].js' : '[name].js',
     path: path.resolve(__dirname, '../dist')
   },
   resolve: {
@@ -67,9 +69,9 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       title: '小猪导航',
-      favicon: path.resolve(__dirname, '../public/logo.png'),
+      favicon: path.resolve(__dirname, '../public/favicon.ico'),
       template: path.resolve(__dirname, '../public/index.html')
     }),
-    new CleanWebpackPlugin()
-  ]
+    isProd && new CleanWebpackPlugin()
+  ].filter(i => !!i)
 };

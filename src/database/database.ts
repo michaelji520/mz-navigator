@@ -31,9 +31,6 @@ export const SEARCH_ENGINES: Array<SearchEngine> = [
 ];
 
 /*
-图片相关
-
-
 在线视频
 
 https://www.iqiyi.com/
@@ -94,22 +91,16 @@ export const WEBSITES: Array<Category> = [
         description: '免费的在线图像编辑器'
       },
       {
-        icon: '',
-        name: 'Tinypng',
+        icon: require('./assets/icons/tinypng.png'),
+        name: 'TinyPNG',
         url: 'https://tinyjpg.com',
-        description: ''
+        description: 'Compress PNG images while preserving transparency'
       },
       {
-        icon: '',
-        name: '',
+        icon: require('./assets/icons/soogif.png'),
+        name: 'SOOGIF',
         url: 'https://www.soogif.com/',
-        description: ''
-      },
-      {
-        icon: '',
-        name: '',
-        url: '',
-        description: ''
+        description: 'Gif动态图片搜索引擎_在线一键制作压缩动图表情工具！'
       },
     ]
   }
