@@ -77,11 +77,6 @@ export const WEBSITES: Array<Category> = [
       },
     ]
   },
-
-
-
-https://tinyjpg.com/
-https://www.soogif.com/
   {
     name: '图片编辑',
     value: 2,
@@ -93,21 +88,21 @@ https://www.soogif.com/
         description: '免费在线图片压缩、GIF压缩工具、PDF压缩工具、PDF合并工具、PDF分割工具'
       },
       {
-        icon: '',
-        name: '',
+        icon: require('./assets/icons/photopea.png').default,
+        name: 'Photopea',
         url: 'https://www.photopea.com',
+        description: '免费的在线图像编辑器'
+      },
+      {
+        icon: '',
+        name: 'Tinypng',
+        url: 'https://tinyjpg.com',
         description: ''
       },
       {
         icon: '',
         name: '',
-        url: '',
-        description: ''
-      },
-      {
-        icon: '',
-        name: '',
-        url: '',
+        url: 'https://www.soogif.com/',
         description: ''
       },
       {
