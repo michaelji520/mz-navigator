@@ -30,29 +30,92 @@ export const SEARCH_ENGINES: Array<SearchEngine> = [
   }
 ];
 
+/*
+图片相关
+
+
+在线视频
+
+https://www.iqiyi.com/
+https://v.qq.com/
+https://www.bilibili.com/
+https://www.mgtv.com/
+https://www.youku.com/
+
+在线翻译
+
+https://fanyi.baidu.com/
+
+文件共享
+
+https://xiaomark.com/tool
+https://www.soukuzhan.com/
+*/
+
 export const WEBSITES: Array<Category> = [
   {
-    name: '排版处理',
+    name: '图文排版',
     value: 1,
     links: [
       {
-        icon: '',
-        url: '',
+        icon: require('./assets/icons/xiumi.png').default,
+        url: 'https://xiumi.us',
         name: '秀米',
-        description: ''
+        description: '原创模板素材，精选风格排版'
       },
       {
-        icon: '',
-        url: '',
+        icon: require('./assets/icons/newrank.ico').default,
+        url: 'https://edit.newrank.cn',
+        name: '新榜编辑器',
+        description: '让你的图文编辑生动有趣'
+      },
+      {
+        icon: require('./assets/icons/135.ico'),
+        url: 'https://www.135editor.com',
         name: '135编辑器',
-        description: ''
-      },
-      {
-        icon: '',
-        url: '',
-        name: 'i排版',
-        description: ''
+        description: '微信公众号图文排版工具，好用素材多'
       },
     ]
   },
+
+
+
+https://tinyjpg.com/
+https://www.soogif.com/
+  {
+    name: '图片编辑',
+    value: 2,
+    links: [
+      {
+        icon: require('./assets/icons/docsmall.png').default,
+        name: 'Docsmall',
+        url: 'https://docsmall.com/image-compress',
+        description: '免费在线图片压缩、GIF压缩工具、PDF压缩工具、PDF合并工具、PDF分割工具'
+      },
+      {
+        icon: '',
+        name: '',
+        url: 'https://www.photopea.com',
+        description: ''
+      },
+      {
+        icon: '',
+        name: '',
+        url: '',
+        description: ''
+      },
+      {
+        icon: '',
+        name: '',
+        url: '',
+        description: ''
+      },
+      {
+        icon: '',
+        name: '',
+        url: '',
+        description: ''
+      },
+    ]
+  }
 ]
