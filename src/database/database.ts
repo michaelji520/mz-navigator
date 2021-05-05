@@ -30,25 +30,6 @@ export const SEARCH_ENGINES: Array<SearchEngine> = [
   }
 ];
 
-/*
-在线视频
-
-https://www.iqiyi.com/
-https://v.qq.com/
-https://www.bilibili.com/
-https://www.mgtv.com/
-https://www.youku.com/
-
-在线翻译
-
-https://fanyi.baidu.com/
-
-文件共享
-
-https://xiaomark.com/tool
-https://www.soukuzhan.com/
-*/
-
 export const WEBSITES: Array<Category> = [
   {
     name: '图文排版',
@@ -67,7 +48,7 @@ export const WEBSITES: Array<Category> = [
         description: '让你的图文编辑生动有趣'
       },
       {
-        icon: require('./assets/icons/135.ico'),
+        icon: require('./assets/icons/135.ico').default,
         url: 'https://www.135editor.com',
         name: '135编辑器',
         description: '微信公众号图文排版工具，好用素材多'
@@ -91,17 +72,58 @@ export const WEBSITES: Array<Category> = [
         description: '免费的在线图像编辑器'
       },
       {
-        icon: require('./assets/icons/tinypng.png'),
+        icon: require('./assets/icons/tinypng.png').default,
         name: 'TinyPNG',
         url: 'https://tinyjpg.com',
         description: 'Compress PNG images while preserving transparency'
       },
       {
-        icon: require('./assets/icons/soogif.png'),
+        icon: require('./assets/icons/soogif.png').default,
         name: 'SOOGIF',
         url: 'https://www.soogif.com/',
         description: 'Gif动态图片搜索引擎_在线一键制作压缩动图表情工具！'
       },
     ]
-  }
+  },
+  {
+    name: '在线视频',
+    value: 3,
+    links: [
+      {
+        icon: require('./assets/icons/iqiyi.png').default,
+        name: '爱奇艺',
+        url: 'https://www.iqiyi.com/',
+        description: '在线视频网站-海量正版高清视频在线观看'
+      },
+      {
+        icon: require('./assets/icons/tencent-video.ico').default,
+        name: '腾讯视频',
+        url: 'https://v.qq.com/',
+        description: '中国领先的在线视频媒体平台,海量高清视频在线观看'
+      },
+      {
+        icon: require('./assets/icons/bilibili.ico').default,
+        name: '哔哩哔哩',
+        url: 'https://www.bilibili.com/',
+        description: '哔哩哔哩 (゜-゜)つロ 干杯~-bilibili'
+      },
+      {
+        icon: require('./assets/icons/mgtv.ico').default,
+        name: '芒果TV',
+        url: 'https://www.mgtv.com/',
+        description: '大家都在看的在线视频网站-热门综艺最新电影电视剧在线观看'
+      },
+      {
+        icon: require('./assets/icons/youku.png').default,
+        name: '优酷',
+        url: 'https://www.youku.com/',
+        description: '这世界很酷'
+      },
+    ]
+  },
 ]
+
+/*
+https://xiaomark.com/tool
+https://www.soukuzhan.com/
+*/
