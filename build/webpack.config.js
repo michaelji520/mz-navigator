@@ -22,6 +22,7 @@ module.exports = {
     // Webpack's resolve.mainFields option determines which fields in package.json are used to resolve identifiers. If you're using Svelte components installed from npm, you should specify this option so that your app can use the original component source code, rather than consuming the already-compiled version (which is less efficient).
     mainFields: ['svelte', 'browser', 'module', 'main']
   },
+  devServer: isProd ? undefined : {host: '0.0.0.0'},
   module: {
     rules: [
       {
