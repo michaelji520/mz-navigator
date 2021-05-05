@@ -42,6 +42,12 @@ export const WEBSITES: Array<Category> = [
         description: '原创模板素材，精选风格排版'
       },
       {
+        icon: require('./assets/icons/weixin.ico').default,
+        url: 'https://mp.weixin.qq.com/',
+        name: '微信公众平台',
+        description: '微信公众平台，给个人、企业和组织提供业务服务与用户管理能力的全新服务平台。'
+      },
+      {
         icon: require('./assets/icons/newrank.ico').default,
         url: 'https://edit.newrank.cn',
         name: '新榜编辑器',
