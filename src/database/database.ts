@@ -2,7 +2,6 @@
  * @description 本文件保存导航信息元数据
  */
 
-
 export const SEARCH_ENGINES: Array<SearchEngine> = [
   {
     key: 'baidu',
@@ -33,7 +32,6 @@ export const SEARCH_ENGINES: Array<SearchEngine> = [
 export const WEBSITES: Array<Category> = [
   {
     name: '图文排版',
-    value: 1,
     links: [
       {
         icon: require('./assets/icons/xiumi.png').default,
@@ -63,7 +61,6 @@ export const WEBSITES: Array<Category> = [
   },
   {
     name: '图片编辑',
-    value: 2,
     links: [
       {
         icon: require('./assets/icons/docsmall.png').default,
@@ -92,8 +89,30 @@ export const WEBSITES: Array<Category> = [
     ]
   },
   {
+    name: '实用工具',
+    links: [
+      {
+        icon: require('./assets/icons/iLovePDF.png').default,
+        name: 'iLovePDF',
+        url: 'https://www.ilovepdf.com/',
+        description: 'iLovePDF is an online service to work with PDF files completely free and easy to use. Merge PDF, split PDF, compress PDF, office to PDF, PDF to JPG and more!'
+      },
+      {
+        icon: require('./assets/icons/baimiao.ico').default,
+        name: '白描OCR',
+        url: 'https://web.baimiaoapp.com/',
+        description: '图片转文字在线 - 图片文字提取 - 网页OCR文字识别'
+      },
+      {
+        icon: require('./assets/icons/EasyScreenOCR.ico').default,
+        name: 'EasyScreenOCR',
+        url: 'https://online.easyscreenocr.com/ZH/',
+        description: 'EasyScreenOCR免費提供100％免費的在線光學字符識別（OCR）服務。 您可以從圖像中提取英語，中文，日語，葡萄牙語，法語，意大利語，西班牙語，俄語，韓語文本。'
+      },
+    ]
+  },
+  {
     name: '在线视频',
-    value: 3,
     links: [
       {
         icon: require('./assets/icons/iqiyi.png').default,

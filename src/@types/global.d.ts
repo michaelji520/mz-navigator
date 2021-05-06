@@ -34,8 +34,6 @@ interface Website {
 interface Category {
   // 分类名称
   name: string;
-  // 分类标识
-  value: number;
   // 分类下的链接列表
   links: Array<Website>;
 }
