@@ -46,7 +46,6 @@
   }
 
   const handleInputKeyDown = (e) => {
-    console.log(e);
     if (e.keyCode === 13) {
       openNewTab(current, SEARCH_ENGINES);
     }
@@ -102,7 +101,7 @@
         display: flex;
         li {
           font-size: 14px;
-          padding: 6px 20px;
+          padding: 8px 20px;
           cursor: pointer;
           background-color: rgba(255, 255, 255, 0.1);
           border-radius: 4px 4px 0 0;

@@ -18,6 +18,7 @@ var putPolicy = new qiniu.rs.PutPolicy(options);
 var uploadToken = putPolicy.uploadToken(mac);
 var formUploader = new qiniu.form_up.FormUploader(config);
 const distPath = path.resolve(__dirname, '../dist');
+var cdnManager = new qiniu.cdn.CdnManager(mac);
 
 // 列举bucket
 // bucketManager.listBucket((err, buckerList, body) => {});
@@ -45,7 +46,6 @@ function upload(fileName, dir) {
     let putExtra = new qiniu.form_up.PutExtra();
     putExtra.fname = fileName;
     putExtra.mimeType = mime.getType(fileName);
-    console.log(putExtra);
     formUploader.putFile(uploadToken, fileName, `${dir}/${fileName}`, putExtra, function(respErr, respBody, respInfo) {
       if (respErr) throw respErr;
       if (respInfo.statusCode == 200) resolve(respBody);
@@ -54,10 +54,26 @@ function upload(fileName, dir) {
   });
 }
 
+function refreshCDNDirs(dirs) {
+  return new Promise((resolve, reject) => {
+    cdnManager.refreshDirs(dirs, function(err, info, body) {qiniu
+      if (err) reject(err);
+      resolve(info);
+    });
+  });
+}
+
 async function main() {
   const files = await getDirFileNameList(distPath);
+  const dirs2Refresh = ['http://cdn.zhangji.xyz/'];
   Promise.all(files.map((i) => {
     return upload(i, distPath);
-  })).then((res) => {console.log(res)}).catch((err) => {console.log(err)});
+  })).then((res) => {
+    // console.log(res)
+    return refreshCDNDirs(dirs2Refresh);
+  }).then((info) => {
+    console.log(info);
+    console.log('execute refresh success!')
+  }).catch((err) => {console.log(err)});
 }
 main();
