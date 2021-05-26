@@ -7,7 +7,7 @@ const MZQiniuUploadWebpackPlugin = require('mz-qiniu-upload-webpack-plugin');
 const QINIU_UPLOAD_CONFIG = require('../qiniu-config/index');
 
 const isProd = process.env.NODE_ENV === 'production';
-const isAutoPublish = process.env.AUTO_PUBLISH = 'true';
+const isAutoPublish = process.env.AUTO_PUBLISH === 'true';
 
 module.exports = {
   mode: isProd ? 'production' : 'development',
