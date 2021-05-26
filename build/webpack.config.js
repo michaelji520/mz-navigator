@@ -2,8 +2,12 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const sveltePreprocess = require('svelte-preprocess');
+const MZQiniuUploadWebpackPlugin = require('mz-qiniu-upload-webpack-plugin');
+
+const QINIU_UPLOAD_CONFIG = require('../qiniu-config/index');
 
 const isProd = process.env.NODE_ENV === 'production';
+const isAutoPublish = process.env.AUTO_PUBLISH = 'true';
 
 module.exports = {
   mode: isProd ? 'production' : 'development',
@@ -73,6 +77,7 @@ module.exports = {
       favicon: path.resolve(__dirname, '../public/favicon.ico'),
       template: path.resolve(__dirname, '../public/index.html')
     }),
-    isProd && new CleanWebpackPlugin()
+    isProd && new CleanWebpackPlugin(),
+    isProd && isAutoPublish && new MZQiniuUploadWebpackPlugin(QINIU_UPLOAD_CONFIG)
   ].filter(i => !!i)
 };
