@@ -109,6 +109,12 @@ export const WEBSITES: Array<Category> = [
         url: 'https://online.easyscreenocr.com/ZH/',
         description: 'EasyScreenOCR免費提供100％免費的在線光學字符識別（OCR）服務。 您可以從圖像中提取英語，中文，日語，葡萄牙語，法語，意大利語，西班牙語，俄語，韓語文本。'
       },
+      {
+        icon: require('./assets/icons/beibei.jpg').default,
+        name: '贝贝BiliBili',
+        url: 'https://xbeibeix.com/api/bilibili/',
+        description: '贝贝BiliBili - B站视频下载'
+      },
     ]
   },
   {
