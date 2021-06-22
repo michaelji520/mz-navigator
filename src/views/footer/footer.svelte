@@ -1,6 +1,6 @@
 <div class="footer">
   <div>Made with ❤ by Michael Zhang</div>
-  <div>声明：本页面所有资源均采集自互联网，如有侵权，请邮件通知删除(michaelji520@gmail.com)</div>
+  <div>声明：本页面所有资源均采集自互联网，如有侵权，请<a href="mailto:michaelji520@gmail.com">发送邮件</a>通知删除</div>
 </div>
 
 <style lang="less">
