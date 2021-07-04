@@ -31,7 +31,7 @@ export const SEARCH_ENGINES: Array<SearchEngine> = [
 
 export const WEBSITES: Array<Category> = [
   {
-    name: '图文排版',
+    name: '妞妞专用',
     links: [
       {
         icon: require('./assets/icons/xiumi.png').default,
@@ -44,6 +44,12 @@ export const WEBSITES: Array<Category> = [
         url: 'https://mp.weixin.qq.com/',
         name: '微信公众平台',
         description: '微信公众平台，给个人、企业和组织提供业务服务与用户管理能力的全新服务平台。'
+      },
+      {
+        icon: require('./assets/icons/cnki.ico').default,
+        name: '中国知网',
+        url: 'https://www.cnki.net/',
+        description: '中国知网知识发现网络平台—面向海内外读者提供中国学术文献、外文文献、学位论文、报纸、会议、年鉴、工具书等各类资源统一检索、统一导航、在线阅读和下载服务。涵盖基础科学、文史哲、工程科技、社会科学、农业、经济与管理科学、医药卫生、信息科技等十大领域。'
       },
       {
         icon: require('./assets/icons/newrank.ico').default,
