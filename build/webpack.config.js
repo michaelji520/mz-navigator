@@ -12,7 +12,8 @@ const isAutoPublish = process.env.AUTO_PUBLISH === 'true';
 module.exports = {
   mode: isProd ? 'production' : 'development',
   entry: {
-    app: path.resolve(__dirname, '../src/app.ts')
+    app: path.resolve(__dirname, '../src/app.ts'),
+    video: path.resolve(__dirname, '../src/applications/video/video.ts')
   },
   output: {
     filename: isProd ? '[name].[hash:8].js' : '[name].js',
@@ -74,8 +75,17 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       title: '小猪导航',
+      filename: 'index.html',
       favicon: path.resolve(__dirname, '../public/favicon.ico'),
-      template: path.resolve(__dirname, '../public/index.html')
+      template: path.resolve(__dirname, '../public/index.html'),
+      chunks: ['app']
+    }),
+    new HtmlWebpackPlugin({
+      title: '观看视频',
+      filename: 'video.html',
+      favicon: path.resolve(__dirname, '../public/favicon.ico'),
+      template: path.resolve(__dirname, '../public/index.html'),
+      chunks: ['video']
     }),
     isProd && new CleanWebpackPlugin(),
     isProd && isAutoPublish && new MZQiniuUploadWebpackPlugin(QINIU_UPLOAD_CONFIG)

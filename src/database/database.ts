@@ -156,6 +156,12 @@ export const WEBSITES: Array<Category> = [
         url: 'https://www.youku.com/',
         description: '这世界很酷'
       },
+      {
+        icon: require('./assets/icons/video.png').default,
+        name: '看VIP视频',
+        url: './video.html',
+        description: '我能看前面几个网站的VIP视频呦'
+      },
     ]
   },
 ]
