@@ -1,11 +1,15 @@
 <div class="container">
   <input bind:value={url} type="text" name="keyword" class="keyword" placeholder="请输入要观看的视频地址">
-  <button on:click={handleButtonClick}>访问</button>
+  <button on:click={handleClear}>清空</button>
+  <button on:click={handleVisit}>访问</button>
 </div>
 
 <script>
   let url = '';
-  const handleButtonClick = () => {
+  const handleClear = () => {
+    url = '';
+  }
+  const handleVisit = () => {
     window.open(`https://jx.m3u8.tv/jiexi/?url=${encodeURIComponent(url)}`,'_blank');
   }
 

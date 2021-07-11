@@ -92,6 +92,12 @@ export const WEBSITES: Array<Category> = [
         url: 'https://www.soogif.com/',
         description: 'Gif动态图片搜索引擎_在线一键制作压缩动图表情工具！'
       },
+      {
+        icon: require('./assets/icons/iloveimg.png').default,
+        name: 'iloveimg',
+        url: 'https://www.iloveimg.com/zh-cn',
+        description: 'iLoveIMG是一款在线处理图片文件的网站。我们的服务完全免费，而且使用简便。网站的功能有：压缩图像文件、调整文件尺寸、裁剪文件，以及转换文件格式等！'
+      }
     ]
   },
   {
