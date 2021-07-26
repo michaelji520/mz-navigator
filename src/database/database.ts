@@ -164,9 +164,9 @@ export const WEBSITES: Array<Category> = [
       },
       {
         icon: require('./assets/icons/video.png').default,
-        name: '看VIP视频',
+        name: 'VIP视频',
         url: './video.html',
-        description: '我能看前面几个网站的VIP视频呦'
+        description: '我能看VIP视频呦'
       },
     ]
   },
