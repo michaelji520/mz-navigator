@@ -176,9 +176,9 @@
       .option-list {
         position: absolute;
         font-size: 14px;
-        line-height: 24px;
+        line-height: 30px;
         top: 100%;
-        background: rgba(255, 255, 255, 0.9);
+        background: #EEEEEE;
         border-radius: 4px;
         width: 100%;
         box-shadow: 0px 0px 1px 0px #AAAAAA;
