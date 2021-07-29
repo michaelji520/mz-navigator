@@ -12,6 +12,8 @@ interface SearchEngine {
   link: string;
   // 搜索引擎名称
   name: string;
+  // 搜索建议
+  suggestion?: Function;
 }
 
 /**

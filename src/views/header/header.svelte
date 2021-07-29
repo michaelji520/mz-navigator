@@ -17,11 +17,13 @@
       <span class="icon-wrapper">
         <svg class="search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="576" data-spm-anchor-id="a313x.7781069.1998910419.i1"><path d="M192 448c0-141.152 114.848-256 256-256s256 114.848 256 256-114.848 256-256 256-256-114.848-256-256z m710.624 409.376l-206.88-206.88A318.784 318.784 0 0 0 768 448c0-176.736-143.264-320-320-320S128 271.264 128 448s143.264 320 320 320a318.784 318.784 0 0 0 202.496-72.256l206.88 206.88 45.248-45.248z" p-id="577"></path></svg>
       </span>
-      <ul class="option-list">
-        {#each suggestions as sug, i}
-        <li on:click={(e) => handleSuggestionOptionClick(e, i)}>{sug}</li>
-        {/each}
-      </ul>
+      {#if isDisplaySuggestions}
+        <ul class="option-list">
+          {#each suggestions as sug, i}
+          <li on:click={(e) => handleSuggestionOptionClick(e, i)}>{sug}</li>
+          {/each}
+        </ul>
+      {/if}
     </div>
   </div>
 
@@ -39,6 +41,7 @@
   let sentence: string = '';
   let baiduSug = null;
   let suggestions = [];
+  let isDisplaySuggestions: boolean = false;
 
   let current = 0;
 
@@ -54,7 +57,8 @@
 
   const handleTextInput = () => {
     if (!keyword) return suggestions = [];
-    const src = `https://suggestion.baidu.com/su?wd=${keyword}&cb=window.baidu.sug&t=${new Date().getTime()}`;
+    if (!isDisplaySuggestions) isDisplaySuggestions = true;
+    const src = `http://unionsug.baidu.com/su?wd=${keyword}&cb=window.baidu.sug&t=${new Date().getTime()}`;
     bindBaiduSuggestionHandler(src);
   }
 
@@ -70,14 +74,15 @@
 
   const bindBaiduSuggestionHandler = (src) => {
     baiduSug = document.createElement('script');
-    baiduSug.src = src;
     baiduSug.onload = function (e) {e.currentTarget.remove()};
     baiduSug.onerror = function (e) {e.currentTarget.remove()};
-    document.getElementsByTagName("head")[0].appendChild(baiduSug);
+    baiduSug.src = src;
+    document.body.appendChild(baiduSug);
   }
 
   const handleSuggestionOptionClick = (e, i) => {
     keyword = suggestions[i];
+    isDisplaySuggestions = false;
     openNewTab(current, SEARCH_ENGINES);
   }
 
@@ -92,7 +97,7 @@
 </script>
 
 <style lang="less">
-  .header { 
+  .header {
     width: 100%;
     height: 400px;
     background-image: url('./assets/b5.jpg');

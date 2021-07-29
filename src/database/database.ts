@@ -7,25 +7,29 @@ export const SEARCH_ENGINES: Array<SearchEngine> = [
     key: 'baidu',
     icon: require('./assets/icons/baidu.ico').default,
     link: 'https://www.baidu.com/s?wd=',
-    name: '百度'
+    name: '百度',
+    suggestion: () => {},
   },
   {
     key: 'sougou',
     icon: require('./assets/icons/sougou.ico').default,
     link: 'https://www.sogou.com/web?query=',
-    name: '搜狗'
+    name: '搜狗',
+    suggestion: null,
   },
   {
     key: 'bing',
     icon: require('./assets/icons/sougou.ico').default,
     link: 'https://cn.bing.com/search?q=',
-    name: '必应'
+    name: '必应',
+    suggestion: null,
   },
   {
     key: 'google',
     icon: require('./assets/icons/google.png').default,
     link: 'https://www.google.com/search?q=',
-    name: '谷歌'
+    name: '谷歌',
+    suggestion: null,
   }
 ];
 
