@@ -21,5 +21,8 @@ declare module '*.less' {
 }
 
 interface Window {
-  suggestionHandler: any;
+  baidu: any;
+  sogou: any;
+  bing: any;
+  google: any;
 }

@@ -10,19 +10,20 @@ export const SEARCH_ENGINES: Array<SearchEngine> = [
     name: '百度',
     suggestion: {
       bindSuggestionHandler: (callback) => {
-        window.suggestionHandler = (params) => callback(params.s || []);
+        window.baidu = {
+          sug: (params) => callback(params.s || [])
+        };
       },
-      unbindSuggestionHandler: () => {window.suggestionHandler = undefined},
+      unbindSuggestionHandler: () => {window.baidu = undefined},
       getSuggestions: (keyword) => {
-        const src = `http://unionsug.baidu.com/su?wd=${keyword}&cb=window.suggestionHandler&t=${new Date().getTime()}`;
-        const baiduSug = document.createElement('script');
+        const src = `//unionsug.baidu.com/su?wd=${keyword}&cb=window.baidu.sug&t=${new Date().getTime()}`;
+        const sug = document.createElement('script');
         // @ts-ignore
-        baiduSug.onload = function (e) {e.currentTarget.remove()};
+        sug.onload = function (e) {e.currentTarget.remove()};
         // @ts-ignore
-        baiduSug.onerror = function (e) {e.currentTarget.remove()};
-        baiduSug.src = src;
-        document.body.appendChild(baiduSug);
-
+        sug.onerror = function (e) {e.currentTarget.remove()};
+        sug.src = src;
+        document.body.appendChild(sug);
       }
     },
   },
@@ -31,21 +32,79 @@ export const SEARCH_ENGINES: Array<SearchEngine> = [
     icon: require('./assets/icons/sougou.ico').default,
     link: 'https://www.sogou.com/web?query=',
     name: '搜狗',
-    suggestion: null,
+    suggestion: {
+      bindSuggestionHandler: (callback) => {
+        window.sogou = {
+          sug: (params) => callback(params[1] || [])
+        };
+      },
+      unbindSuggestionHandler: () => {window.sogou = undefined},
+      getSuggestions: (keyword) => {
+        const src = `//www.sogou.com/suggnew/ajajjson?key=${keyword}&cb=window.suggestionHandler&t=${new Date().getTime()}`;
+        const sug = document.createElement('script');
+        // @ts-ignore
+        sug.onload = function (e) {e.currentTarget.remove()};
+        // @ts-ignore
+        sug.onerror = function (e) {e.currentTarget.remove()};
+        sug.src = src;
+        document.body.appendChild(sug);
+      }
+    },
   },
   {
     key: 'bing',
     icon: require('./assets/icons/sougou.ico').default,
     link: 'https://cn.bing.com/search?q=',
     name: '必应',
-    suggestion: null,
+    suggestion: {
+      bindSuggestionHandler: (callback) => {
+        window.bing = {
+          sug: (params) => {
+            const results = params.AS && params.AS.Results &&  params.AS.Results[0].Suggests;
+            callback(results && results.map(i => i.Txt) || []);
+          }
+        };
+      },
+      unbindSuggestionHandler: () => {window.bing = undefined},
+      getSuggestions: (keyword) => {
+        const src = `//api.bing.com/qsonhs.aspx?type=cb&q=${keyword}&cb=window.bing.sug&t=${new Date().getTime()}`;
+        const sug = document.createElement('script');
+        // @ts-ignore
+        sug.onload = function (e) {e.currentTarget.remove()};
+        // @ts-ignore
+        sug.onerror = function (e) {e.currentTarget.remove()};
+        sug.src = src;
+        document.body.appendChild(sug);
+      }
+    },
   },
   {
     key: 'google',
     icon: require('./assets/icons/google.png').default,
     link: 'https://www.google.com/search?q=',
     name: '谷歌',
-    suggestion: null,
+    suggestion: {
+      bindSuggestionHandler: (callback) => {
+        window.google = {
+          sug: (params) => {
+            const results = params && params[1] || []
+            callback(results);
+          }
+        };
+      },
+      unbindSuggestionHandler: () => {window.google = undefined},
+      getSuggestions: (keyword) => {
+        const src = `//suggestqueries.google.com/complete/search?client=chrome&q=${keyword}&jsonp=window.google.sug&t=${new Date().getTime()}`;
+        const sug = document.createElement('script');
+        // @ts-ignore
+        sug.onload = function (e) {e.currentTarget.remove()};
+        // @ts-ignore
+        sug.onerror = function (e) {e.currentTarget.remove()};
+        sug.src = src;
+        document.body.appendChild(sug);
+      }
+
+    },
   }
 ];
 

@@ -64,9 +64,10 @@
 
   const handleSearchEngineClick = (e, idx) => {
     const prev = SEARCH_ENGINES[current];
-    prev.suggestion.unbindSuggestionHandler();
+    prev.suggestion && prev.suggestion.unbindSuggestionHandler();
     current = idx;
     bindSuggestionHandler();
+    suggestions = [];
   }
 
   function bindSuggestionHandler() {
