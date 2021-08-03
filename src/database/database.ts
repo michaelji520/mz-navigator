@@ -8,7 +8,22 @@ export const SEARCH_ENGINES: Array<SearchEngine> = [
     icon: require('./assets/icons/baidu.ico').default,
     link: 'https://www.baidu.com/s?wd=',
     name: '百度',
-    suggestion: () => {},
+    suggestion: {
+      bindSuggestionsHandler: (callback) => {
+        window.suggestionHandler = (params) => callback(params.s || []);
+      },
+      getSuggestions: (keyword) => {
+        const src = `http://unionsug.baidu.com/su?wd=${keyword}&cb=window.suggestionHandler&t=${new Date().getTime()}`;
+        const baiduSug = document.createElement('script');
+        // @ts-ignore
+        baiduSug.onload = function (e) {e.currentTarget.remove()};
+        // @ts-ignore
+        baiduSug.onerror = function (e) {e.currentTarget.remove()};
+        baiduSug.src = src;
+        document.body.appendChild(baiduSug);
+
+      }
+    },
   },
   {
     key: 'sougou',

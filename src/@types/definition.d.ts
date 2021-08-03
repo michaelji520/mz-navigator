@@ -19,3 +19,7 @@ declare module '*.svelte' {
 declare module '*.less' {
   export default any;
 }
+
+interface Window {
+  suggestionHandler: any;
+}

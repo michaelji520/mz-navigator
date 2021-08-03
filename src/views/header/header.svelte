@@ -17,13 +17,11 @@
       <span class="icon-wrapper">
         <svg class="search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="576" data-spm-anchor-id="a313x.7781069.1998910419.i1"><path d="M192 448c0-141.152 114.848-256 256-256s256 114.848 256 256-114.848 256-256 256-256-114.848-256-256z m710.624 409.376l-206.88-206.88A318.784 318.784 0 0 0 768 448c0-176.736-143.264-320-320-320S128 271.264 128 448s143.264 320 320 320a318.784 318.784 0 0 0 202.496-72.256l206.88 206.88 45.248-45.248z" p-id="577"></path></svg>
       </span>
-      {#if isDisplaySuggestions}
-        <ul class="option-list">
-          {#each suggestions as sug, i}
-          <li on:click={(e) => handleSuggestionOptionClick(e, i)}>{sug}</li>
-          {/each}
-        </ul>
-      {/if}
+      <ul class="option-list">
+        {#each suggestions as sug, i}
+        <li on:click={(e) => handleSuggestionOptionClick(e, i)}>{sug}</li>
+        {/each}
+      </ul>
     </div>
   </div>
 
@@ -39,12 +37,12 @@
   const datetime = `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日 ${week[date.getDay()]}`;
   let keyword = '';
   let sentence: string = '';
-  let baiduSug = null;
   let suggestions = [];
-  let isDisplaySuggestions: boolean = false;
 
   let current = 0;
 
+  bindSuggestionsHandler();
+  // 获取每日一言
   Flyio.get('https://v1.hitokoto.cn').then((res) => {
     const data = res && res.data || {};
     sentence = data.hitokoto && data.from ? `${data.hitokoto}  ——${data.from}` : '';
@@ -57,42 +55,31 @@
 
   const handleTextInput = () => {
     if (!keyword) return suggestions = [];
-    if (!isDisplaySuggestions) isDisplaySuggestions = true;
-    const src = `http://unionsug.baidu.com/su?wd=${keyword}&cb=window.baidu.sug&t=${new Date().getTime()}`;
-    bindBaiduSuggestionHandler(src);
+    SEARCH_ENGINES[current].suggestion.getSuggestions(keyword);
   }
 
   const handleInputKeyDown = (e) => {
-    if (e.keyCode === 13) {
-      openNewTab(current, SEARCH_ENGINES);
-    }
+    if (e.keyCode === 13) openNewTab(current, SEARCH_ENGINES);
   }
 
   const handleSearchEngineClick = (e, idx) => {
     current = idx;
+    bindSuggestionsHandler();
   }
 
-  const bindBaiduSuggestionHandler = (src) => {
-    baiduSug = document.createElement('script');
-    baiduSug.onload = function (e) {e.currentTarget.remove()};
-    baiduSug.onerror = function (e) {e.currentTarget.remove()};
-    baiduSug.src = src;
-    document.body.appendChild(baiduSug);
+  function bindSuggestionsHandler() {
+    const enging = SEARCH_ENGINES[current];
+    enging.suggestion && enging.suggestion.bindSuggestionsHandler((params) => {
+      suggestions = params;
+    });
+
   }
 
   const handleSuggestionOptionClick = (e, i) => {
     keyword = suggestions[i];
-    isDisplaySuggestions = false;
+    suggestions = [];
     openNewTab(current, SEARCH_ENGINES);
   }
-
-  window.baidu = {
-    sug: function (params) {
-      suggestions = params.s || [];
-    }
-  };
-
-
 
 </script>
 
