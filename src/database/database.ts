@@ -9,9 +9,10 @@ export const SEARCH_ENGINES: Array<SearchEngine> = [
     link: 'https://www.baidu.com/s?wd=',
     name: '百度',
     suggestion: {
-      bindSuggestionsHandler: (callback) => {
+      bindSuggestionHandler: (callback) => {
         window.suggestionHandler = (params) => callback(params.s || []);
       },
+      unbindSuggestionHandler: () => {window.suggestionHandler = undefined},
       getSuggestions: (keyword) => {
         const src = `http://unionsug.baidu.com/su?wd=${keyword}&cb=window.suggestionHandler&t=${new Date().getTime()}`;
         const baiduSug = document.createElement('script');

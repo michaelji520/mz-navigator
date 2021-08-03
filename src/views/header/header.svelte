@@ -41,7 +41,7 @@
 
   let current = 0;
 
-  bindSuggestionsHandler();
+  bindSuggestionHandler();
   // 获取每日一言
   Flyio.get('https://v1.hitokoto.cn').then((res) => {
     const data = res && res.data || {};
@@ -63,13 +63,15 @@
   }
 
   const handleSearchEngineClick = (e, idx) => {
+    const prev = SEARCH_ENGINES[current];
+    prev.suggestion.unbindSuggestionHandler();
     current = idx;
-    bindSuggestionsHandler();
+    bindSuggestionHandler();
   }
 
-  function bindSuggestionsHandler() {
+  function bindSuggestionHandler() {
     const enging = SEARCH_ENGINES[current];
-    enging.suggestion && enging.suggestion.bindSuggestionsHandler((params) => {
+    enging.suggestion && enging.suggestion.bindSuggestionHandler((params) => {
       suggestions = params;
     });
 

@@ -14,8 +14,9 @@ interface SearchEngine {
   name: string;
   // 搜索建议
   suggestion?: {
-    bindSuggestionsHandler: Function;
+    bindSuggestionHandler: Function;
     getSuggestions: Function;
+    unbindSuggestionHandler: Function
   };
 }
 
