@@ -2,12 +2,9 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const sveltePreprocess = require('svelte-preprocess');
-const MZQiniuUploadWebpackPlugin = require('mz-qiniu-upload-webpack-plugin');
-
-const QINIU_UPLOAD_CONFIG = require('../qiniu-config/index');
 
 const isProd = process.env.NODE_ENV === 'production';
-const isAutoPublish = process.env.AUTO_PUBLISH === 'true';
+	const isDeploy = process.env.DEPLOY === 'true';
 
 module.exports = {
   mode: isProd ? 'production' : 'development',
@@ -88,6 +85,6 @@ module.exports = {
       chunks: ['video']
     }),
     isProd && new CleanWebpackPlugin(),
-    isProd && isAutoPublish && new MZQiniuUploadWebpackPlugin(QINIU_UPLOAD_CONFIG)
+    isProd && isDeploy && Cop
   ].filter(i => !!i)
 };
