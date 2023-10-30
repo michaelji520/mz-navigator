@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const sveltePreprocess = require('svelte-preprocess');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const isProd = process.env.NODE_ENV === 'production';
 	const isDeploy = process.env.DEPLOY === 'true';
@@ -85,6 +86,11 @@ module.exports = {
       chunks: ['video']
     }),
     isProd && new CleanWebpackPlugin(),
-    isProd && isDeploy && Cop
+    isProd && isDeploy && new CopyWebpackPlugin({
+      patterns: [
+        from: path.resolve(__dirname, '../dist/'),
+        to: '/home/www/navigator/'
+      ]
+    })
   ].filter(i => !!i)
 };
