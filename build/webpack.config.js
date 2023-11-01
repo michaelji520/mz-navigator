@@ -88,8 +88,10 @@ module.exports = {
     isProd && new CleanWebpackPlugin(),
     isProd && isDeploy && new CopyWebpackPlugin({
       patterns: [
-        from: path.resolve(__dirname, '../dist/'),
-        to: '/home/www/navigator/'
+        {
+	  from: path.resolve(__dirname, '../dist/'),
+	  to: '/home/www/navigator/'
+	}
       ]
     })
   ].filter(i => !!i)
